@@ -5,8 +5,8 @@ import Movies from "../models/movies";
 const MoviesSchema = Joi.object({
     name: Joi.string().required(),
     img: Joi.string().required(),
-    diem: Joi.number().required(),
-    nam: Joi.number().required(),
+    diem: Joi.string().required(),
+    nam: Joi.string().required(),
     desc: Joi.string().required(),
     video:Joi.string().required()
 });
