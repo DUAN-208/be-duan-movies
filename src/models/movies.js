@@ -19,6 +19,10 @@ const moviesSchema = mongoose.Schema(
             type: Number,
             require: true
         },
+        video:{
+            type:String,
+            require:true
+        },
         desc: {
             type: String,
             require: true
