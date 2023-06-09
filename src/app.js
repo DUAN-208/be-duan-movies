@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import routerMovies from "./routers/movies";
 import routerAuth from "./routers/auth";
+import routerMovies from "./routers/movies";
 const app = express();
 
 app.use(express.json());
