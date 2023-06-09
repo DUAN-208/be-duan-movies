@@ -9,4 +9,6 @@ router.patch("/movies/:id", update);
 router.delete("/movies/:id", remove);
 router.get("/movies/:id", get);
 
+
 export default router
+
