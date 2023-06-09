@@ -86,3 +86,16 @@ export const update = async (req ,res )=>{
       }
 };
 
+export const remove = async (req, res) => {
+    try {
+        const data = await Movies.findByIdAndDelete(req.params.id);
+        return res.json({
+            message: "Xóa sản phẩm thành công",
+            data,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
