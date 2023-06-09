@@ -12,11 +12,11 @@ const moviesSchema = mongoose.Schema(
             require: true
         },
         diem: {
-            type: Number,
+            type: String,
             require: true
         },
         nam: {
-            type: Number,
+            type: String,
             require: true
         },
         video:{
