@@ -8,15 +8,17 @@ const MoviesSchema = Joi.object({
     diem: Joi.number().required(),
     nam: Joi.number().required(),
     desc: Joi.string().required(),
+    video:Joi.string().required()
 });
 
 export const create = async (req, res) => {
     try {
         const body = req.body;
-        const { error } = MoviesSchema.validate(body);
+        const { error } = MoviesSchema.validate(body,{abortEarly:false
+        });
         if (error) {
             return res.json({
-                message: error.details[0].message,
+                message: error.details.map(err=> err.message),
             });
         }
         const movies = await Movies.create(body);
@@ -62,4 +64,25 @@ export const getAll = async (req, res) => {
             });
         }
     };
+ 
+export const update = async (req ,res )=>{
+    try{
+        const{error}= MoviesSchema.validate(req.body,{abortEarly:false});
+        if (error) {
+            return res.json({
+              messages: error.details.map((err) => err.message),
+            });
+        }
+        const data = await Movies.findByIdAndUpdate(
+            { _id: req.params.id },
+            req.body,
+            { new: true }
+          );
+          !data
+          ? res.json({ message: "Cập nhật Phim không thành công" })
+          : res.json({ message: "Cập nhật Phim  thành công", data });
+    }catch (error) {
+        return res.json({ message: error.message });
+      }
+};
 
