@@ -2,6 +2,13 @@ import User from "../models/auth"
 import bcrypt from "bcryptjs"
 import { signinSchema, signupSchema  } from "../schemas/auth"
 import jwt from "jsonwebtoken"
+import Joi from "joi"
+
+const UserSchema = Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().required(),
+        password: Joi.number().required()
+    });
 
 export const signup =async (req,res)=>{
         try {
@@ -71,7 +78,7 @@ export const signin = async (req, res) => {
                         message:error.message
                 })
         }
-}
+
 export const remove = async (req, res) => {
         try {
             const data = await User.findByIdAndDelete(req.params.id);
@@ -85,3 +92,25 @@ export const remove = async (req, res) => {
             });
         }
     };
+
+    export const update = async (req ,res )=>{
+        try{
+            const{error}= UserSchema.validate(req.body,{abortEarly:false});
+            if (error) {
+                return res.json({
+                  messages: error.details.map((err) => err.message),
+                });
+            }
+            const data = await User.findByIdAndUpdate(
+                { _id: req.params.id },
+                req.body,
+                { new: true }
+              );
+              !data
+              ? res.json({ message: "Cập nhật User không thành công" })
+              : res.json({ message: "Cập nhật User  thành công", data });
+        }catch (error) {
+            return res.json({ message: error.message });
+          }
+    };
+   
