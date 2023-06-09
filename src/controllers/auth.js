@@ -78,7 +78,7 @@ export const signin = async (req, res) => {
                         message:error.message
                 })
         }
-
+}
 export const remove = async (req, res) => {
         try {
             const data = await User.findByIdAndDelete(req.params.id);
@@ -113,4 +113,19 @@ export const remove = async (req, res) => {
             return res.json({ message: error.message });
           }
     };
-   
+    export const getAll = async (req, res) => {
+        try {
+            const data = await User.find();
+            if (data.length == 0) {
+                return res.json({
+                    message: "Không có tài khoản nào",
+                });
+            }
+            return res.json(data);
+        } catch (error) {
+                return res.status(400).json({
+                    message: error.message,
+                });
+            }
+    };
+
