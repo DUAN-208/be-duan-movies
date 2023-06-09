@@ -8,6 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/api',routerAuth)
-mongoose.connect(`mongodb://localhost:27017/duan-movies`);
+
+mongoose.connect(`mongodb://127.0.0.1:27017/duan-movies`);
 
 export const viteNodeApp = app;
