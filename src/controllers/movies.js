@@ -99,3 +99,20 @@ export const remove = async (req, res) => {
         });
     }
 };
+export const get = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Movies.findOne({ _id: id })
+        if (data.length === 0) {
+            return res.status(200).json({
+                message: "Không có phim",
+            });
+        }
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
+
