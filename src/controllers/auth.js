@@ -128,4 +128,21 @@ export const remove = async (req, res) => {
                 });
             }
     };
+    export const getOne =async (req,res)=>{
+        try {
+                const id = req.params.id;
+                console.log(id);
+                const data = await User.findById({_id:id})
+                if(!data){
+                        return res.json({
+                                message:"Không có sản phẩm"
+                        })
+                }
+                return res.json({
+                        user:data
+                })
+        } catch (error) {
+                return res.json({message:error.message})
+        }
+    }
 
