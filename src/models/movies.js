@@ -12,7 +12,7 @@ const moviesSchema = mongoose.Schema(
             require: true
         },
         diem: {
-            type: String,
+            type: Number,
             require: true
         },
         nam: {
@@ -29,7 +29,7 @@ const moviesSchema = mongoose.Schema(
         },
         
         
-    },{timestamp:true,versionKay:false}
+    },{timestamps:true,versionKay:false}
 );
 moviesSchema.plugin(mongoosePaginate)
 export default mongoose.model("Movies", moviesSchema)
