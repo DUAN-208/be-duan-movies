@@ -1,20 +1,12 @@
 
-import Joi from "joi";
 import Movies from "../models/movies";
+import { moviesSchema } from "../schemas/movies";
 
-const MoviesSchema = Joi.object({
-    name: Joi.string().required(),
-    img: Joi.string().required(),
-    diem: Joi.string().required(),
-    nam: Joi.string().required(),
-    desc: Joi.string().required(),
-    video:Joi.string().required()
-});
 
 export const create = async (req, res) => {
     try {
         const body = req.body;
-        const { error } = MoviesSchema.validate(body,{abortEarly:false
+        const { error } = moviesSchema.validate(body,{abortEarly:false
         });
         if (error) {
             return res.json({
@@ -67,12 +59,7 @@ export const getAll = async (req, res) => {
  
 export const update = async (req ,res )=>{
     try{
-        const{error}= MoviesSchema.validate(req.body,{abortEarly:false});
-        if (error) {
-            return res.json({
-              messages: error.details.map((err) => err.message),
-            });
-        }
+        
         const data = await Movies.findByIdAndUpdate(
             { _id: req.params.id },
             req.body,

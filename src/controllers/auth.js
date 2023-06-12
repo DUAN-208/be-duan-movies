@@ -95,12 +95,7 @@ export const remove = async (req, res) => {
 
     export const update = async (req ,res )=>{
         try{
-            const{error}= UserSchema.validate(req.body,{abortEarly:false});
-            if (error) {
-                return res.json({
-                  messages: error.details.map((err) => err.message),
-                });
-            }
+            
             const data = await User.findByIdAndUpdate(
                 { _id: req.params.id },
                 req.body,
