@@ -5,18 +5,14 @@ import  User from '../models/auth';
 export const checkPermission =async (req, res, next) => {
         try {
                 if(!req.headers.authorization){
-                        return res.json({
-                                message:'Bạn chưa đăng nhập'
-                        })
+                        return res.json(1)
                 }
                 const token = req.headers.authorization.split(" ")[1]
                 const {id} = jwt.verify(token,'123456')
                 const user = await User.findById(id)
 
                 if(user.role != 'admin'){
-                        return res.json({
-                                message:"Bạn không phải admin"
-                        })
+                        return res.json(1)
                 }
                 next()
         } catch (error) {
